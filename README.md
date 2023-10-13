@@ -24,7 +24,9 @@ To schedule the script to run once a day at a specific time, such as 10 am, you 
     You can search for "Task Scheduler" in the Windows search bar and open it.
     In the Task Scheduler window, click on "Create Basic Task" in the right-hand panel.
 
-- **Give your task a name, e.g. WordPressUpdateVersion, then click "Next."**
+- **Give the task a name, e.g. WordPressUpdateVersion** 
+
+    Check 'Run with highest privileges' and then click "Next."
 
     Choose the "Daily" trigger and click "Next."
 
