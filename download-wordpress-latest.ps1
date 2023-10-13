@@ -12,7 +12,7 @@ $downloadFileName = "wordpress.zip"
 $locale = "en_GB"
 $subDomain = "en-gb"
 $downloadUrlStub = "https://$subDomain.wordpress.org/wordpress-"
-$destinationDir = ".\wordpress-latest"
+$destinationDir = "wordpress-latest"
 
 # Check if the version file exists
 if (Test-Path $versionFile) {
@@ -62,8 +62,8 @@ if ($latestVersion -ne $currentVersion) {
             $removed = $false
             try {
                 if ($currentVersion -ne "") {
-                    #Remove-Item -Path $destinationDir -Force -Recurse
-                    Rename-Item -Path $destinationDir -NewName "wordpress-$currentVersion"
+                    #Remove-Item -Path ".\$destinationDir" -Force -Recurse
+                    Rename-Item -Path ".\$destinationDir" -NewName "wordpress-$currentVersion"
                 }
                 Write-Host "Archived version $currentVersion"
                 $removed = $true
@@ -74,13 +74,13 @@ if ($latestVersion -ne $currentVersion) {
             if ($removed) {
                 # Rename the new WordPress to the path of the old one
                 $renamed = $false
-                try {                    
-                    Rename-Item -Path .\wordpress -NewName wordpress-latest
+                try {
+                    Rename-Item -Path .\wordpress -NewName $destinationDir
 
                     # Remove Akismet & Hello Dolly
                     try {
-                        Remove-Item -Path ".\wordpress-latest\wp-content\plugins\akismet" -Force -Recurse
-                        Remove-Item -Path ".\wordpress-latest\wp-content\plugins\hello.php" -Force
+                        Remove-Item -Path ".\$destinationDir\wp-content\plugins\akismet" -Force -Recurse
+                        Remove-Item -Path ".\$destinationDir\wp-content\plugins\hello.php" -Force
                         Write-Host "Default plugins removed"
                     } catch {
                         Write-Host "Failed to remove default plugins"
@@ -88,7 +88,7 @@ if ($latestVersion -ne $currentVersion) {
 
                     # Remove default themes
                     try {
-                        $directoryToClean = ".\wordpress-latest\wp-content\themes\"
+                        $directoryToClean = ".\$destinationDir\wp-content\themes\"
 
                         # Get a list of directories in the specified path
                         $directories = Get-ChildItem -Path $directoryToClean -Directory
