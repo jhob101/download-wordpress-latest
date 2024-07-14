@@ -74,6 +74,7 @@ if [ "$latestVersion" != "$currentVersion" ]; then
                 # Clean up: Remove the downloaded zip
                 rm -f "$downloadFileName"
                 echo "WordPress updated to version $latestVersion"
+                notify-send "WordPress updated to version $latestVersion"
             else
                 echo "Failed to rename the new WordPress directory"
             fi
