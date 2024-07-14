@@ -1,5 +1,5 @@
 # Download latest WordPress version
-Windows Powershell script to check for a new WordPress version, if there is one to download it and then to archive the previously downloaded version.
+Windows Powershell & BASH scripts to check for a new WordPress version, if there is one to download it and then to archive the previously downloaded version.
 
 The script: 
 - Checks for a new version
@@ -16,7 +16,27 @@ It's designed to be run as a scheduled task which you can set up using the instr
 
 Note that this is the first PowerShell script I've written, so it's possibly not the most efficient way of doing things, but it works!
 
-## Create Scheduled Task
+## Linux Setup
+
+### Install dependencies
+sudo apt install jq
+
+### Make the script executable
+```
+chmod +x download-wordpress-latest.sh 
+```
+### Add a CRON job
+Open Crontab to edit:
+```
+crontab -e
+```
+
+Add the following line to the crontab to run the script every day at 10 am, alter the timing to suit your needs.
+```
+0 10 * * * /path/to/download-wordpress-latest.sh
+```
+
+## Create Scheduled Task (WINDOWS)
 To schedule the script to run once a day at a specific time, such as 10 am, you can use the Windows Task Scheduler. Here's how you can do it:
 
 - **Open the Task Scheduler:**
